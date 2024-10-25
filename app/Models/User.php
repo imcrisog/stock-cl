@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function setPasswordAttribute($password) 
+    {
+        return $this->attributes['password'] = hash('sha256', $password);
+    }
 }
