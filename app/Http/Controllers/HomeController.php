@@ -6,15 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        if (View::exists('index')) {
-            return View('index');
-        }
-        return 'General View';
+        return View('index');
     }
 
     public function login()
@@ -38,6 +36,7 @@ class HomeController extends Controller
             'password' => 'Invalid name or password'
         ]);
         
-        return redirect()->route('index');
+        return var_dump($request);
+        //  return redirect()->route('index');
     }
 }
