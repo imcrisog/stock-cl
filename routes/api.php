@@ -9,5 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('/v1')->group(function () {
-    Route::post('/stock', [StockController::class, 'plugin_store']);
+    Route::post('/stock/{stock}', [StockController::class, 'plugin_rest']);
 });
