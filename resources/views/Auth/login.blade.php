@@ -5,7 +5,7 @@
 @section('content')
 <div class="w-full h-screen flex bg-slate-900 text-black">
     <div class=" w-1/2 h-1/2 rounded-md bg-slate-800 flex flex-col justify-center items-center m-auto">
-        <form action="" method="post" class="text-white flex flex-col gap-y-2">
+        <form action="{{ route('auth.login.store') }}" method="post" class="text-white flex flex-col gap-y-2">
             <h2 class="font-bold text-2xl">Stock Cl</h2>
             @csrf
             <div class="flex-1 relative">
