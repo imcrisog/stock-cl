@@ -25,18 +25,19 @@ class HomeController extends Controller
     public function storelogin(Request $request)
     {
         $credentials = $request->only('name', 'password');
-        $findUser = User::where('name', '=', $credentials['name'])->first();
+        $credentials['password'] = bcrypt($credentials['password']);
+
+        $findUser = User::where('name', '=', $request->name)->first();
         
         if (!$findUser) return back()->withErrors([
             'name' => 'User does not exist',
         ]);
         
-        if (!Auth::attempt($credentials)) return back()->withErrors([
+        if (!(Auth::attempt($credentials))) return back()->withErrors([
             'name' => 'Invalid name or password',
             'password' => 'Invalid name or password'
         ]);
         
-        return var_dump($request);
-        //  return redirect()->route('index');
+        return redirect()->route('index');
     }
 }

@@ -21,6 +21,6 @@ class AuthenticateUser
             return $next($request);
         }
         
-        return response('Unauthorized.', 401);
+        return  redirect()->route('login');
     }
 }
