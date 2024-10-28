@@ -4,7 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StockController;
 use App\Http\Middleware\AuthenticateUser;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProfileController;
 
 // Landing Routes
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -16,11 +16,12 @@ Route::get('/home', [HomeController::class, 'home'])->name('home')->middleware(A
 
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::post('/login', [HomeController::class, 'storelogin']);
+Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
 
-Route::post('/settings/update', [HomeController::class, 'update'])->name('update');
-Route::post('/settings/delete', [HomeController::class, 'delete'])->name('delete');
+Route::post('/settings/update', [ProfileController::class, 'updater'])->name('update');
+Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('delete');
 
 // Inventory Routes
 
