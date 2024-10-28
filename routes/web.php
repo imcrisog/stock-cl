@@ -14,11 +14,10 @@ Route::post('/', [HomeController::class, 'index']);
 
 Route::get('/home', [HomeController::class, 'home'])->name('home')->middleware(AuthenticateUser::class);
 
-Route::get('/login', [HomeController::class, 'login'])->name('login');
-Route::post('/login', [HomeController::class, 'storelogin']);
-Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+Route::get('/login', [HomeController::class, 'login'])->name('auth.login.show');
+Route::post('/login', [HomeController::class, 'storelogin'])->name('auth.login.store');
 
-Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
+Route::get('/logout', [HomeController::class, 'logout'])->name('auth.logout');
 
 Route::post('/settings/update', [ProfileController::class, 'updater'])->name('update');
 Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('delete');
