@@ -10,9 +10,6 @@
 </head>
 <body>
     <main class="w-full h-screen flex bg-slate-900 text-white">
-        <nav class="w-full h-10 absolute justify-between items-center bg-slate-800 text-white">
-            <a href="{{route('home')}}" class="text-2xl font-bold mx-auto">Stock Cl</a>
-        </nav>
         @yield('content')
     </main>
 </body>
