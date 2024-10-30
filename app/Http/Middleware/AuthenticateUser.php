@@ -17,10 +17,11 @@ class AuthenticateUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            return $next($request);
+        if (!(auth()->check()))
+        {
+            return redirect()->route('auth.login.show');
         }
         
-        return  redirect()->route('login');
+        return $next($request);
     }
 }

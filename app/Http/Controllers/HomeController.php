@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 
 class HomeController extends Controller
 {
@@ -15,29 +14,53 @@ class HomeController extends Controller
         return View('index');
     }
 
+    public function home()
+    {
+        return dd(auth()->check());
+        return View('home', [
+            'title' => 'Home',
+            'user' => auth()->user()
+        ]);
+    }
+
     public function login()
     {
-        return View('Auth.login', [
+        return View('auth.login', [
             'title' => 'Login'
         ]);
     }
 
     public function storelogin(Request $request)
     {
-        $credentials = $request->only('name', 'password');
-        $credentials['password'] = bcrypt($credentials['password']);
-
+        $credentials = $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+        ]);
+        
         $findUser = User::where('name', '=', $request->name)->first();
         
         if (!$findUser) return back()->withErrors([
             'name' => 'User does not exist',
         ]);
-        
-        if (!(Auth::attempt($credentials))) return back()->withErrors([
+
+        if (auth()->attempt($credentials, isset($request->remember))) {
+            return redirect()->route('home');
+        }
+    
+        return back()->withErrors([
             'name' => 'Invalid name or password',
             'password' => 'Invalid name or password'
         ]);
-        
-        return redirect()->route('index');
     }
+    
+    public function logout(Request $req)
+    {
+        auth()->logout();
+
+        $req->session()->invalidate();
+        $req->session()->regenerateToken();
+        
+        return redirect()->route('auth.login.show');
+    }
+
 }
