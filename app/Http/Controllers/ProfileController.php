@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    public function settings(Request $req) 
+    {
+        $user = Auth::user();
+        return view('Profile.settings', compact('user'));
+    }
+
     public function updater(Request $req) 
     {
         $req->validate([

@@ -17,10 +17,12 @@ Route::get('/home', [HomeController::class, 'home'])->name('home')->middleware(A
 Route::get('/login', [HomeController::class, 'login'])->name('auth.login.show');
 Route::post('/login', [HomeController::class, 'storelogin'])->name('auth.login.store');
 
-Route::get('/logout', [HomeController::class, 'logout'])->name('auth.logout');
+Route::get( '/logout', [HomeController::class, 'logout'])->name('auth.logout');
 
-Route::post('/settings/update', [ProfileController::class, 'updater'])->name('update');
-Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('delete');
+Route::get('/settings', [ProfileController::class, 'settings'])->name('settings')->middleware(AuthenticateUser::class);
+
+Route::post('/settings/update', [ProfileController::class, 'updater'])->name('settings.update');
+Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('settings.delete');
 
 // Inventory Routes
 

@@ -16,21 +16,26 @@ class HomeController extends Controller
 
     public function home()
     {
+        return dd(auth()->check());
         return View('home', [
             'title' => 'Home',
+            'user' => auth()->user()
         ]);
     }
 
     public function login()
     {
-        return View('Auth.login', [
+        return View('auth.login', [
             'title' => 'Login'
         ]);
     }
 
     public function storelogin(Request $request)
     {
-        $credentials = $request->only('name', 'password');
+        $credentials = $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+        ]);
         
         $findUser = User::where('name', '=', $request->name)->first();
         
@@ -38,8 +43,7 @@ class HomeController extends Controller
             'name' => 'User does not exist',
         ]);
 
-        if (Auth::attempt($credentials, isset($request->remember))) {
-            cookie('name', $request->name, 60, '/', 'http://localhost/stock-cl');
+        if (auth()->attempt($credentials, isset($request->remember))) {
             return redirect()->route('home');
         }
     
@@ -49,10 +53,14 @@ class HomeController extends Controller
         ]);
     }
     
-    public function logout()
+    public function logout(Request $req)
     {
-        Auth::logout();
-        return redirect()->route('login');
+        auth()->logout();
+
+        $req->session()->invalidate();
+        $req->session()->regenerateToken();
+        
+        return redirect()->route('auth.login.show');
     }
 
 }
