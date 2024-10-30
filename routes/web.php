@@ -26,4 +26,6 @@ Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('se
 
 // Inventory Routes
 
-Route::resource('/stocks', StockController::class);
+Route::resource('/stocks', StockController::class)->missing(function () {
+    return redirect()->route('stocks.index');
+});
