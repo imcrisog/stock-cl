@@ -27,6 +27,12 @@
                 <div class="py-2 text-center mx-2 w-auto rounded-lg transform duration-200 hover:bg-slate-600">
                     <a href="{{route('home')}}" class="text-xl font-bold">Home</a>
                 </div>
+
+                <div class="py-2 text-center mx-2 w-auto rounded-lg transform duration-200 hover:bg-slate-600">
+                    <a href="{{route('stock.index')}}" class="text-xl font-bold">Home</a>
+                </div>
+
+
                 
                 <!-- all the options cases and general options -->
 
