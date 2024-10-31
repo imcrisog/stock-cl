@@ -3,34 +3,66 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return View('index');
+        return View('index', [
+            'title' => 'StockCL',
+        ]);
     }
 
     public function home()
     {
-        return dd(auth()->check());
         return View('home', [
             'title' => 'Home',
             'user' => auth()->user()
         ]);
     }
 
-    public function login()
+    public function register(Request $req) // remove in production
     {
+        return View('Auth.register', [
+            'title' => 'Register'
+        ]);
+    }
+    
+    public function storeregister(Request $req) // remove in production
+    {
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::create([
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password),
+        ]);
+
+        $user->save();
+        Auth::login($user);
+
+        return redirect()->route('home');
+    }
+
+    public function login()
+    { 
         return View('auth.login', [
             'title' => 'Login'
         ]);
     }
 
-    public function storelogin(Request $request)
+    public function storelogin(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'name' => 'required',
@@ -44,7 +76,8 @@ class HomeController extends Controller
         ]);
 
         if (auth()->attempt($credentials, isset($request->remember))) {
-            return redirect()->route('home');
+            $request->session()->regenerate();
+            return redirect()->intended(route('home'));
         }
     
         return back()->withErrors([
@@ -53,7 +86,7 @@ class HomeController extends Controller
         ]);
     }
     
-    public function logout(Request $req)
+    public function logout(Request $req): RedirectResponse
     {
         auth()->logout();
 

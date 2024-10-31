@@ -24,16 +24,22 @@
                 <a href="{{route('home')}}" class="text-2xl font-bold mx-auto">Stock Cl</a> 
             </div>
             <div class="flex flex-col  w-full h-full gap-y-2"> 
-                <div class="py-2 text-center mx-2 w-auto rounded-lg transform duration-200 hover:bg-slate-600">
-                    <a href="{{route('home')}}" class="text-xl font-bold">Home</a>
+                <div class="text-center transform duration-200 hover:bg-slate-600">
+                    <a href="{{route('home')}}" class="text-xl font-bold w-full flex py-2 justify-center">Home</a>
                 </div>
+
+                <div class="text-center transform duration-200 hover:bg-slate-600">
+                    <a href="{{route('stocks.index')}}" class="text-xl font-bold w-full flex py-2 justify-center">Stocks</a>
+                </div>
+
+
                 
                 <!-- all the options cases and general options -->
 
             </div>
         </aside>
 
-        <section class="w-5/6 h-screen flex place-self-end">
+        <section class="w-5/6 mt-[3rem] h-auto flex place-self-end min-h-[90vh]">
             @yield('content')
         </section>
 
