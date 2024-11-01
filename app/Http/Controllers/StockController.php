@@ -21,7 +21,7 @@ class StockController extends Controller
         return View('Stock.create');
     }
 
-    public function store(Request $req) 
+    public function store(Request $req, Stock $stock) 
     {
         $req->validate([
             'name' => 'required',
@@ -32,7 +32,7 @@ class StockController extends Controller
 
         $stock = Stock::create($req->all());
 
-        return redirect()->route('stocks');
+        return redirect()->route('stocks.index');
 
     }
 
@@ -48,11 +48,16 @@ class StockController extends Controller
 
     public function update(Request $req, Stock $stock) 
     {
+        $findStock = $stock::where('id', '=', $stock->id);
+        if (!isset($findStock)) return back()->withErrors('Stock no encontrado');
+        return $findStock;
+
         $req->validate([
-            'name' => 'required',
-            'quantity' => 'required|integer',
-            'price' => 'required|numeric',
-            'from' => 'required',
+            'name' => 'string' || $findStock->name,
+            'quantity' => 'integer' || $findStock->quantity,
+            'price' => 'numeric' || $findStock->price,
+            'from' => 'string' || $findStock->from,
+            'updated_at' => 'timestamp' || $findStock->updated_at,
         ]);
 
         $stock->update($req->all());
@@ -64,7 +69,7 @@ class StockController extends Controller
     {
         $stock->delete();
 
-        return redirect()->route('Stocks.index');
+        return redirect()->route('Stock.index');
     }
     
 

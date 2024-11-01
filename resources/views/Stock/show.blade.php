@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<a href="{{route('stocks.index')}}" class=" m-4 absolute top-0 left-0 py-2 px-4 rounded-md border-[1px] border-gray-600 hover:bg-gray-600 font-extrabold"> X </a>
 <div class="w-full h-full rounded-md flex m-auto max-h-screen">
     <div class="w-auto m-auto flex flex-col items-center bg-slate-800 rounded-md p-4 font-semibold min-w-80 relative">
-        <a href="{{route('stocks.index')}}" class="absolute top-0 left-0 py-2 px-4 rounded-md border-[1px] border-gray-600 hover:bg-gray-600 font-extrabold"> X </a>
         
         <span class="text-xl font-bold my-2">{{$stock->name}}</span>
         <div class="flex flex-col gap-y-2 text-sm">
