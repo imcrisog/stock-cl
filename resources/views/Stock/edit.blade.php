@@ -1,7 +1,9 @@
 @extends('layouts.app') 
 
 @section('content')
-<a href="{{route('stocks.index')}}" class="absolute top-0 left-0 py-2 px-4 rounded-md border-[1px] border-gray-600 hover:bg-gray-600 font-extrabold m-4"> X </a>
+<a href="{{route('stocks.index')}}" class="absolute top-0 left-0 p-2rounded-md border-[1px] border-gray-600 hover:bg-gray-600 font-extrabold m-4">
+    <svg  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-square-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 2h-14a3 3 0 0 0 -3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3 -3v-14a3 3 0 0 0 -3 -3zm-9.387 6.21l.094 .083l2.293 2.292l2.293 -2.292a1 1 0 0 1 1.497 1.32l-.083 .094l-2.292 2.293l2.292 2.293a1 1 0 0 1 -1.32 1.497l-.094 -.083l-2.293 -2.292l-2.293 2.292a1 1 0 0 1 -1.497 -1.32l.083 -.094l2.292 -2.293l-2.292 -2.293a1 1 0 0 1 1.32 -1.497z" /></svg>
+</a>
 <div class="w-auto h-1/2 m-auto bg-slate-800 rounded-md p-4 pt-6 relative">
     
     <span class="text-2xl font-bold">Editar objeto: {{$stock->name}}</span>
@@ -21,9 +23,12 @@
                 <label for="price"></label>
                 <input type="number" name="price" id="price" class="bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="Precio">
             </div>
-            <div class="w-2/5 m-auto">
-                <label for="from"></label>
-                <input type="text" maxlength="5" name="from" id="from" style="width: -webkit-fill-available;" class=" bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="De Donde">
+            <div class="w-1/3 m-auto">
+                <select name="from" id="from" class="bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md">
+                    <option value="one">Uno</option>
+                    <option value="two">Dos</option>
+                    <option value="three">Tres</option>
+                </select>
             </div>
         </section>
         <div>
