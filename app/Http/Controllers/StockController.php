@@ -50,26 +50,25 @@ class StockController extends Controller
     {
         $findStock = $stock::where('id', '=', $stock->id);
         if (!isset($findStock)) return back()->withErrors('Stock no encontrado');
-        return $findStock;
 
         $req->validate([
             'name' => 'string' || $findStock->name,
             'quantity' => 'integer' || $findStock->quantity,
             'price' => 'numeric' || $findStock->price,
             'from' => 'string' || $findStock->from,
-            'updated_at' => 'timestamp' || $findStock->updated_at,
+            'updated_at' => 'timestamp',
         ]);
 
         $stock->update($req->all());
 
-        return redirect()->route('Stock.index');
+        return redirect()->route('stocks.index');
     }
 
     public function destroy(Stock $stock) 
     {
         $stock->delete();
 
-        return redirect()->route('Stock.index');
+        return redirect()->route('stocks.index');
     }
     
 

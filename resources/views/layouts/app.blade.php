@@ -8,7 +8,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
 </head>
-<body class="bg-slate-900 ">
+<body class="bg-slate-900 flex">
+    <div id="background" class="w-full h-screen opacity-50 fixed z-[25] bg-black hidden"></div>
     <main class="w-full h-full text-white">
         <nav class="w-full h-12 fixed top-0 right-0  bg-slate-800 flex justify-end z-10">
             <div class="flex items-center justify-end w-5/6 h-full [&>*]:mx-2">

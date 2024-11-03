@@ -29,4 +29,5 @@ Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('se
 Route::resource('/stocks', StockController::class)->missing(function () {
     return redirect()->route('stocks.index');
 });
-Route::post('/stocks/{{$id}}', [StockController::class, 'remove'])->name('stock.delete');
+
+Route::post('/stocks/{$id}/edit', [StockController::class, 'update'])->name('stocks.change');
