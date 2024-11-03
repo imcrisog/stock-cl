@@ -39,16 +39,9 @@ class StockController extends Controller
         return view('Stock.edit', compact('stock'));
     }
 
-    public function update(Request $request, Stock $stock) 
+    public function update(StockStoreFormRequest $request, Stock $stock) 
     {
         if (!isset($stock)) return back()->withErrors('Stock no encontrado');
-        
-        $request->only([
-            'name' => 'string',
-            'quantity' => 'integer',
-            'price' => 'numeric',
-            'from' => 'string',
-        ]);
         
         $editStock = $request->all();
 

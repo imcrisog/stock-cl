@@ -30,4 +30,4 @@ Route::resource('/stocks', StockController::class)->missing(function () {
     return redirect()->route('stocks.index');
 });
 
-Route::post('/stocks/{$id}/edit', [StockController::class, 'update'])->name('stocks.change');
+Route::post('/stocks/{stock}/edit', [StockController::class, 'update'])->name('stocks.change');
