@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StockStoreFormRequest;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,19 +22,11 @@ class StockController extends Controller
         return View('Stock.create');
     }
 
-    public function store(Request $req, Stock $stock) 
+    public function store(StockStoreFormRequest $request) 
     {
-        $req->validate([
-            'name' => 'required',
-            'quantity' => 'required|integer',
-            'price' => 'required|numeric',
-            'from' => 'required',
-        ]);
-
-        $stock = Stock::create($req->all());
+        Stock::create($request->validated());
 
         return redirect()->route('stocks.index');
-
     }
 
     public function show(Stock $stock) 
@@ -46,27 +39,20 @@ class StockController extends Controller
         return view('Stock.edit', compact('stock'));
     }
 
-    public function update(Request $req, Stock $stock) 
+    public function update(Request $request, Stock $stock) 
     {
-        $findStock = $stock::where('id', '=', $stock->id);
-        if (!isset($findStock)) return back()->withErrors('Stock no encontrado');
+        if (!isset($stock)) return back()->withErrors('Stock no encontrado');
         
-        $req->only([
+        $request->only([
             'name' => 'string',
             'quantity' => 'integer',
             'price' => 'numeric',
             'from' => 'string',
         ]);
         
-        $editStock = $req->all();
-        unset($editStock['_token'], $editStock['_method']);
-        
-        foreach ($editStock as $key => $value) {
-            if (null === $value) unset($editStock[$key]);
-        }
+        $editStock = $request->all();
 
         $stock->update($editStock);
-
 
         return redirect()->route('stocks.show', $stock->id);
     }
