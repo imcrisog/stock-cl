@@ -8,9 +8,10 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
 </head>
-<body class="bg-slate-900 ">
+<body class="bg-slate-900 flex">
+    <div id="background" class="w-full h-screen opacity-50 fixed z-[25] bg-black hidden"></div>
     <main class="w-full h-full text-white">
-        <nav class="w-full h-12 fixed top-0 right-0  bg-slate-800 flex justify-end">
+        <nav class="w-full h-12 fixed top-0 right-0  bg-slate-800 flex justify-end z-10">
             <div class="flex items-center justify-end w-5/6 h-full [&>*]:mx-2">
                 <div class="inline-flex w-fit items-center align-sub">
                     <a href="{{route('settings')}}" class="font-bold transform hover:bg-slate-600 rounded-md p-2">
@@ -19,7 +20,7 @@
                 </div>
             </div>
         </nav>
-        <aside class="fixed bottom-0 left-0 w-1/6 h-screen bg-slate-950 justify-start">
+        <aside class="fixed bottom-0 left-0 w-1/6 h-screen bg-slate-950 justify-start z-20">
             <div class="flex justify-center items-center w-full mb-2 border-b-[1px] border-slate-700 p-2">  
                 <a href="{{route('home')}}" class="text-2xl font-bold mx-auto">Stock Cl</a> 
             </div>
@@ -39,7 +40,7 @@
             </div>
         </aside>
 
-        <section class="w-5/6 mt-[3rem] h-auto flex place-self-end min-h-[90vh]">
+        <section class="w-5/6 mt-[3rem] h-auto flex place-self-end min-h-[90vh] relative">
             @yield('content')
         </section>
 

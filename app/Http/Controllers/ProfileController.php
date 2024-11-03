@@ -16,12 +16,10 @@ class ProfileController extends Controller
 
     public function updater(Request $req) 
     {
-        $req->validate([
+        $user =  $req->validate([
             'name' => 'required',
             'password' => 'required|min:6|confirmed',
         ]);
-
-        $user = $req->only('name', 'password');
 
         $findUser = User::where('name', '=', $req->name)->first();
 

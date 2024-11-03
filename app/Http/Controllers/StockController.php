@@ -21,7 +21,7 @@ class StockController extends Controller
         return View('Stock.create');
     }
 
-    public function store(Request $req) 
+    public function store(Request $req, Stock $stock) 
     {
         $req->validate([
             'name' => 'required',
@@ -32,7 +32,7 @@ class StockController extends Controller
 
         $stock = Stock::create($req->all());
 
-        return redirect()->route('stocks');
+        return redirect()->route('stocks.index');
 
     }
 
@@ -48,23 +48,34 @@ class StockController extends Controller
 
     public function update(Request $req, Stock $stock) 
     {
-        $req->validate([
-            'name' => 'required',
-            'quantity' => 'required|integer',
-            'price' => 'required|numeric',
-            'from' => 'required',
+        $findStock = $stock::where('id', '=', $stock->id);
+        if (!isset($findStock)) return back()->withErrors('Stock no encontrado');
+        
+        $req->only([
+            'name' => 'string',
+            'quantity' => 'integer',
+            'price' => 'numeric',
+            'from' => 'string',
         ]);
+        
+        $editStock = $req->all();
+        unset($editStock['_token'], $editStock['_method']);
+        
+        foreach ($editStock as $key => $value) {
+            if (null === $value) unset($editStock[$key]);
+        }
 
-        $stock->update($req->all());
+        $stock->update($editStock);
 
-        return redirect()->route('Stock.index');
+
+        return redirect()->route('stocks.show', $stock->id);
     }
 
     public function destroy(Stock $stock) 
     {
         $stock->delete();
 
-        return redirect()->route('Stocks.index');
+        return redirect()->route('stocks.index');
     }
     
 
