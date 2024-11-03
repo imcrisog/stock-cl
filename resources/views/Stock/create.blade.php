@@ -29,7 +29,7 @@
                 <select name="from" id="from" class="bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md">
                     <option value="one">Uno</option>
                     <option value="two">Dos</option>
-                    <option value="three">Tres</option>
+                    <option value="three">eShop</option>
                 </select>
             </div>
         </section>

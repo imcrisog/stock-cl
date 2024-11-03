@@ -16,7 +16,7 @@
             </div>
             <div class="flex flex-row gap-x-2">
                 <span>Precio:</span>
-                <span>${{$stock->price}}CLP</span>
+                <span>$ {{$stock->price}} CLP</span>
             </div>
             <div class="flex flex-row gap-x-2">
                 <span>Cantidad:</span>
@@ -24,7 +24,7 @@
             </div>
             <div class="flex flex-row gap-x-2">
                 <span>Desde:</span>
-                <span>{{$stock->from}}</span>
+                <span>{{ $stock->from }}</span>
             </div>
             <div class="flex flex-row gap-x-2">
                 <span>Actualizado el:</span>

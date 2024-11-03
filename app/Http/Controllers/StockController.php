@@ -19,7 +19,7 @@ class StockController extends Controller
 
     public function create()
     {
-        return View('Stock.create');
+        return view('Stock.create');
     }
 
     public function store(StockStoreFormRequest $request) 
@@ -39,13 +39,13 @@ class StockController extends Controller
         return view('Stock.edit', compact('stock'));
     }
 
-    public function update(StockStoreFormRequest $request, Stock $stock) 
+    public function update(Request $request, Stock $stock) 
     {
-        if (!isset($stock)) return back()->withErrors('Stock no encontrado');
+        if (!$stock) return back()->withErrors('Stock no encontrado');
         
         $editStock = $request->all();
 
-        $stock->update($editStock);
+        $stock->update(array_filter($editStock));
 
         return redirect()->route('stocks.show', $stock->id);
     }
