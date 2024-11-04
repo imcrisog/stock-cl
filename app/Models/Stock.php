@@ -10,7 +10,7 @@ class Stock extends Model
         'name',
         'price',
         'quantity',
-        'from',
+        'from'.
         'description'
     ];
 }

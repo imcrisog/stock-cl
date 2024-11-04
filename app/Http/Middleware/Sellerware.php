@@ -3,12 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
 
-class AuthenticateUser
+class Sellerware
 {
     /**
      * Handle an incoming request.
@@ -17,20 +15,14 @@ class AuthenticateUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // correct way 
-        // if (!(auth()->check()))
-        // {
-        //     return redirect()->route('auth.login.show');
-        // }
-        
-        // return $next($request);
+        if (!auth()-check()) {
+            return redirect()->route('auth.login.show');
+        }
 
-
-        return $next($request);
-        if (!(auth()->check()))
-        {
+        if (auth()->user()->role_id !== 3) {
             return redirect()->route('home');
         }
-        
+
+        return $next($request);
     }
 }
