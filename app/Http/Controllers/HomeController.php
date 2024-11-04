@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function storelogin(Request $request): RedirectResponse
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
         

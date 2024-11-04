@@ -19,8 +19,8 @@
                 </h4>
             @endif
             <div class="flex-1 relative">
-                <label for="name" class="absolute text-sm text-gray-800 -translate-y-3 scale-75 top-2 z-10 origin-[0] px-2">Nombre</label>
-                <input type="text" id="name" name="email" placeholder=" " class="w-full rounded-md p-2 text-black" autocomplete="off" required>
+                <label for="email" class="absolute text-sm text-gray-800 -translate-y-3 scale-75 top-2 z-10 origin-[0] px-2">E-Mail</label>
+                <input type="email" id="email" name="email" placeholder=" " class="w-full rounded-md p-2 text-black" autocomplete="off" required>
             </div>
             <div class="flex-1 relative">
                 <label for="password" class="absolute text-sm text-gray-800 -translate-y-3 scale-75 top-2 z-10 origin-[0] px-2">Contraseña</label>
