@@ -9,10 +9,9 @@ class DataRole extends Seeder
 {
     /**
      * Seed the application's database.
-     */
+     */    
     public function run(): void
     {
-
         Roles::create([
             'id' => '1',
             'name' => 'admin',
@@ -27,5 +26,6 @@ class DataRole extends Seeder
             'id' => '3',
             'name' => 'seller',
         ]);
+
     }
 }
