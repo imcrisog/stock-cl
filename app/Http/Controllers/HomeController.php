@@ -43,13 +43,14 @@ class HomeController extends Controller
             'name' => 'User does not exist',
         ]);
 
+        
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password]) == false) {
             return back()->withErrors([
                 'name' => 'Invalid name',
                 'password' => 'Invalid password'
             ]);
         }
-    
+        
         return redirect()->route('home');
     }
     
