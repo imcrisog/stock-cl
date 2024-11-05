@@ -10,7 +10,7 @@ class ProfileController extends Controller
 {
     public function settings(Request $req) 
     {
-        $user = Auth::user();
+        $user = auth()->user();
         return view('Profile.settings', compact('user'));
     }
 
@@ -18,7 +18,7 @@ class ProfileController extends Controller
     {
         $user =  $req->validate([
             'name' => 'required',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
         ]);
 
         $findUser = User::where('name', '=', $req->name)->first();
