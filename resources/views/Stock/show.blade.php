@@ -8,14 +8,33 @@
 <div class="w-full h-full rounded-md flex m-auto max-h-screen">
     <div class="w-auto m-auto flex flex-col items-center bg-slate-800 rounded-md p-4 font-semibold min-w-80 relative">
         
-        <span class="text-xl font-bold my-2">{{$stock->CODIGO}}</span>
-        <div class="grid grid-cols-5 gap-x-2 gap-y-2">
-            @foreach($stocksColumns as $key => $value)
-                <div class="flex flex-col gap-x-2 max-w-sm">
-                    <span class="font-bold">{{$value}}:</span>
-                    <span class="font-light">{{$stock->$value}}</span>
-                </div>
-            @endforeach
+        <span class="text-xl font-bold my-2">{{$stock->name}}</span>
+        <div class="flex flex-col gap-y-2 text-sm">
+            <div class="flex flex-col gap-x-2 max-w-sm">
+                <span>Descripción:</span>
+                <span>{{$stock->description}}</span>
+            </div>
+            <div class="flex flex-row gap-x-2">
+                <span>Precio:</span>
+                <span>$ {{$stock->price}} CLP</span>
+            </div>
+            <div class="flex flex-row gap-x-2">
+                <span>Cantidad:</span>
+                <span>{{$stock->quantity}}</span>
+            </div>
+            <div class="flex flex-row gap-x-2">
+                <span>Desde:</span>
+                <span>{{ $stock->from }}</span>
+            </div>
+            <div class="flex flex-row gap-x-2">
+                <span>Actualizado el:</span>
+                <span>{{$stock->updated_at}}</span>
+            </div>
+            <div class="flex flex-row gap-x-2">
+                <span>Creado el:</span>
+                <span>{{$stock->created_at}}</span>
+            </div>
+
         </div>
 
         <button id="buttonForDelete" class="w-full text-center flex justify-center items-center border-2 border-red-500 transform duration-200 hover:bg-red-500 rounded-md py-2 mt-4 active:scale-95 active:bg-red-700">
@@ -32,7 +51,7 @@
                         @method('DELETE')
                         <div class="inline-flex flex-col justify-center items-center text-center">
                             <span class="font-bold text-xl">¿Estás seguro de que quieres <strong class="">ELIMINAR</strong> este objeto?</span>
-                            <span class="font-semibold text-green-500 text-lg"> "<strong class="text-red-400">{{strtoupper($stock->CODIGO)}}</strong>"</span>
+                            <span class="font-semibold text-green-500 text-lg"> "<strong class="text-red-400">{{strtoupper($stock->name)}}</strong>"</span>
                         </div>  
         
                         <div class="mx-auto border-t-[1px] border-slate-400 flex justify-center py-2">

@@ -14,36 +14,11 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('CODIGO'); 
-            $table->string('MARCA');
-            $table->string('MODELO');
-            $table->string('ANCHO');
-            $table->string('PERFIL');
-            $table->string('E');
-            $table->string('ARO');
-            $table->string('TIPO');
-            $table->string('TELAS');
-            $table->string('I.C');
-            $table->string('I.V.');
-            $table->string('FAB.');
-            $table->string('C. C/IVA');
-            $table->string('C. NETO');
-            $table->string('%C.P');
-            $table->string('%P.P');
-            $table->string('%P.S');
-            $table->string('%P+S');
-            $table->string('PL');
-            $table->integer('FLETE');
-            $table->string('C.P.');
-            $table->integer('P.DIST');
-            $table->string('M+B+V');
-            $table->integer('PRECIO LISTA');
-            $table->string('PROVEEDOR');
-            $table->string('STOCK R.');
-            $table->string('STOCK O.');
-            $table->string('V.T.R');
-            $table->string('V.T.O');
-            $table->string('TOTALES');
+            $table->string('name');
+            $table->string('description');
+            $table->integer('price');
+            $table->integer('quantity');
+            $table->enum('from', [SiteStorage::One->value, SiteStorage::Two->value, SiteStorage::eShop->value]);
             $table->timestamps();
         });
     }
