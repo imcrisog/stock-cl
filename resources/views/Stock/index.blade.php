@@ -67,19 +67,7 @@
 
 <script>
     const perPage = document.getElementById('perPage');
-    addEventListener('DOMContentLoaded', function() {
-        if ((window.location.href).includes('?perPage=')) 
-        {
-            return window.location.href = window.location.href + '&perPage=' + perPage.value;
-        }
-    });
-
     perPage.addEventListener('change', function() {
-        if ((window.location.href).includes('?page=')) 
-        {
-            return window.location.href = window.location.href + '&perPage=' + perPage.value;
-        }
-
         window.location.href = window.location.href.split('?')[0] + '?perPage=' + perPage.value;
     });
 </script>
