@@ -66,9 +66,9 @@
 </div>
 
 <script>
-    const perPage = document.getElementById('perPage');
-    perPage.addEventListener('change', function() {
-        window.location.href = window.location.href.split('?')[0] + '?perPage=' + perPage.value;
-    });
+        const perPage = document.getElementById('perPage');
+        perPage.addEventListener('change', function() {
+            window.location.href = window.location.href.split('?')[0] + '?perPage=' + perPage.value;
+        });
 </script>
 @endsection
