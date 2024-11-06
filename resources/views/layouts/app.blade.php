@@ -37,17 +37,6 @@
                 
                 <!-- all the options cases and general options -->
 
-                <div class="w-full absolute bg-slate-900 bottom-0 my-8 text-center inline-flex px-4 py-2">
-                    <section class="inline-flex rounded-lg bg-slate-600 py-2 px-4 text-center"> 
-                        <span>
-                            {{ $user->name[0] }}
-                        </span> 
-                    </section>
-                    <span class="font-bold inline-flex justify-center items-center text-center w-full h-auto ">
-                        {{ucfirst($role->name)}}
-                    </span>
-                </div>
-
             </div>
         </aside>
 
