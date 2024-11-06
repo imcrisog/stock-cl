@@ -1,7 +1,9 @@
+
 <?php
 
 namespace App\Http\Controllers;
 
+use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +21,8 @@ class HomeController extends Controller
     {
         return view('home', [
             'title' => 'Home',
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'role' => auth()->user()->role,
         ]);
     }
 
