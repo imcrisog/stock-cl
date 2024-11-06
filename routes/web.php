@@ -15,14 +15,14 @@ Route::post('/', [HomeController::class, 'index']);
 
 // User Routes
 
-Route::get('/home', [HomeController::class, 'home'])->name('home')->middleware('auth');
+Route::get('/home', [HomeController::class, 'home'])->name('home')->middleware(AuthenticateUser::class);
 
 Route::get('/login', [HomeController::class, 'login'])->name('auth.login.show');
 Route::post('/login', [HomeController::class, 'storelogin'])->name('auth.login.store');
 
 Route::get( '/logout', [HomeController::class, 'logout'])->name('auth.logout');
 
-Route::get('/settings', [ProfileController::class, 'settings'])->name('settings')->middleware('auth');
+Route::get('/settings', [ProfileController::class, 'settings'])->name('settings')->middleware(AuthenticateUser::class);
 
 Route::post('/settings/update', [ProfileController::class, 'updater'])->name('settings.update');
 Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('settings.delete');
@@ -32,5 +32,3 @@ Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('se
 Route::resource('/stocks', StockController::class)->missing(function () {
     return redirect()->route('stocks.index');
 });
-
-Route::post('/stocks/{stock}/edit', [StockController::class, 'update'])->name('stocks.change');
