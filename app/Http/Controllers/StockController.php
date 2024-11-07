@@ -10,16 +10,27 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StockController extends Controller
 {
-    public function index() 
+    public function index(Request $request)
     {
-        $stocks = Stock::all();
+        $stocks = Stock::paginate(($request->perPage ?? 5));
+        $user = auth()->user();
+        $role = auth()->user()->role;
+        $stock = $stocks->first();
 
-        return view('Stock.index', compact('stocks'));
+        $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
+            return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'E', 'ARO','STOCK O.', 'STOCK R.', 'PRECIO LISTA', 'PROVEEDOR']);
+        });
+
+        return view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns'));
     }
 
     public function create()
     {
-        return view('Stock.create');
+        $user = auth()->user();
+        $role = auth()->user()->role;
+        $stocksColumns = $stock->getFillable();
+
+        return view('Stock.create', compact('user', 'stocksColumns', 'role'));
     }
 
     public function store(StockStoreFormRequest $request) 
@@ -31,12 +42,19 @@ class StockController extends Controller
 
     public function show(Stock $stock) 
     {
-        return view('Stock.show', compact('stock'));
+        $user = auth()->user();
+        $role = auth()->user()->role;
+        $stocksColumns = $stock->getFillable();
+
+        return view('Stock.show', compact('stock', 'stocksColumns', 'user', 'role'));
     }
 
     public function edit(Stock $stock) 
     {
-        return view('Stock.edit', compact('stock'));
+        $stocksColumns = $stock->getFillable();
+        return $stocksColumns;
+        
+        return view('Stock.edit', compact('stock', 'stocksColumns'));
     }
 
     public function update(Request $request, Stock $stock) 
