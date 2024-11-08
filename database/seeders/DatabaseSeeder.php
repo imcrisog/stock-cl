@@ -23,6 +23,13 @@ class DatabaseSeeder extends Seeder
             'role_id' => '1',
         ]);
 
+        User::factory()->create([
+            'name' => 'TestVendedor',
+            'email' => 'test@seller.com',
+            'password' => 'test',
+            'role_id' => '3',
+        ]);
+
         Roles::create([
             'id' => '1',
             'name' => 'admin',
@@ -30,12 +37,12 @@ class DatabaseSeeder extends Seeder
         
         Roles::create([
             'id' => '2',
-            'name' => 'invspe',
+            'name' => 'secretario',
         ]);
         
         Roles::create([
             'id' => '3',
-            'name' => 'seller',
+            'name' => 'vendedor',
         ]);
     }
 }
