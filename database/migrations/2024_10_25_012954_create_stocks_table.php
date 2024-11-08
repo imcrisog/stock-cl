@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('CODIGO'); 
             $table->string('MARCA');
             $table->string('MODELO');
-            $table->string('ANCHO');
+            $table->decimal('ANCHO');
             $table->string('PERFIL');
             $table->string('E');
             $table->string('ARO');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('I.C');
             $table->string('I.V.');
             $table->string('FAB.');
-            $table->string('C. C/IVA');
+            $table->integer('C. C/IVA');
             $table->string('C. NETO');
             $table->string('%C.P');
             $table->string('%P.P');
@@ -34,9 +34,9 @@ return new class extends Migration
             $table->string('%P+S');
             $table->string('PL');
             $table->integer('FLETE');
-            $table->string('C.P.');
+            $table->integer('C.P.');
             $table->integer('P.DIST');
-            $table->string('M+B+V');
+            $table->integer('M+B+V');
             $table->integer('PRECIO LISTA');
             $table->string('PROVEEDOR');
             $table->string('STOCK R.');

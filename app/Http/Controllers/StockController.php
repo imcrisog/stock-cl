@@ -27,7 +27,7 @@ class StockController extends Controller
         return view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns'));
     }
 
-    public function create()
+    public function create(Stock $stock)
     {
         $user = auth()->user();
         $role = auth()->user()->role;
