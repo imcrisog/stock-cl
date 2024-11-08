@@ -11,7 +11,7 @@
         </div>
         <section class="flex flex-row gap-x-2 items-center w-3/4">
             <div class="flex-inline items-center text-gray-900 font-medium w-full">
-                <input type="text" placeholder="Buscar" class="w-full p-2 rounded-md bg-slate-600 text-white border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
+                <input type="text" placeholder="Buscar por Codigo" autocomplete="off" id="searcher" value="" onkeyup="search(this);" class="w-full p-2 rounded-md bg-slate-600 text-white border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
             </div>
             @if ($role->id <= 2)
                 <a href="{{route('stocks.create')}}" class=" max-w-32 w-1/4 font-semibold bg-amber-500 hover:bg-amber-600 rounded-md px-4 py-2">
@@ -22,7 +22,7 @@
 
     </div>
 
-    <table class="items-center text-center m-4">
+    <table class="items-center text-center m-4" id="table">
         <thead class="bg-slate-700 border-t-2 border-b-2 border-gray-500 h-10">
             <tr>
                 @foreach($stocksColumns as $key => $value)
@@ -33,7 +33,7 @@
         </thead>
         <tbody>
             @foreach($stocks as $key => $stock)
-            <tr class="border-b-[1px] border-slate-500">
+            <tr class="border-b-[1px] border-slate-500" id="tr">
                 @foreach($stocksColumns as $key => $value)
                     <td class="w-[3%] font-semibold">{{ $stock->$value }}</td>
                 @endforeach
@@ -65,10 +65,14 @@
     </div>
 </div>
 
+
+<script src="{{asset('js/searchStock.js')}}"></script>
 <script>
-        const perPage = document.getElementById('perPage');
-        perPage.addEventListener('change', function() {
-            window.location.href = window.location.href.split('?')[0] + '?perPage=' + perPage.value;
-        });
+    const perPage = document.getElementById('perPage');
+
+    perPage.addEventListener('change', function() {
+        window.location.href = window.location.href.split('?')[0] + '?perPage=' + perPage.value;
+    });
+
 </script>
 @endsection

@@ -12,7 +12,10 @@ class StockController extends Controller
 {
     public function index(Request $request)
     {
-        $stocks = Stock::paginate(($request->perPage ?? 5));
+        $stocks = Stock::paginate($request->perPage ?? session()->get('perPage', 5));
+        
+        if (isset($request->perPage)) session()->put('perPage', $request->perPage);
+        
         $user = auth()->user();
         $role = auth()->user()->role;
         $stock = $stocks->first();
@@ -52,9 +55,10 @@ class StockController extends Controller
     public function edit(Stock $stock) 
     {
         $stocksColumns = $stock->getFillable();
-        return $stocksColumns;
+        $user = auth()->user();
+        $role = auth()->user()->role;
         
-        return view('Stock.edit', compact('stock', 'stocksColumns'));
+        return view('Stock.edit', compact('stock', 'stocksColumns', 'user', 'role'));
     }
 
     public function update(Request $request, Stock $stock) 

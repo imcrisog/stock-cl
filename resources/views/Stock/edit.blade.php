@@ -20,24 +20,6 @@
                 <input type="number" name="quantity" id="quantity" style="width: -webkit-fill-available;" class=" bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="Cantidad">
             </div>
         </section>
-        <section class="inline-flex flex-row justify-between">
-            <div class="w-1/2">
-                <label for="price"></label>
-                <input type="number" name="price" id="price" class="bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="Precio">
-            </div>
-            <div class="w-1/3 m-auto">
-                <select name="from" id="from" class="bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md text-center">
-                    <option value="">Seleccione</option>
-                    <option value="one">Uno</option>
-                    <option value="two">Dos</option>
-                    <option value="three">Tres</option>
-                </select>
-            </div>
-        </section>
-        <div>
-            <label for="description"></label>
-            <input type="text" maxlength="255" minlength="1" name="description" id="description" style="width: -webkit-fill-available;" class=" bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="Descripción">
-        </div>
         <div class="mt-2 mx-auto border-t-[1px] border-gray-800">
             <button class="font-bold border-2 border-blue-500 transform duration-150 hover:bg-blue-600 rounded-md py-2 px-4 active:scale-95 active:bg-blue-700">Editar el stock</button>
         </div>
