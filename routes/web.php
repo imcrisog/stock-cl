@@ -22,13 +22,15 @@ Route::post('/login', [HomeController::class, 'storelogin'])->name('auth.login.s
 
 Route::get( '/logout', [HomeController::class, 'logout'])->name('auth.logout');
 
-Route::get('/settings', [ProfileController::class, 'settings'])->name('settings')->middleware(AuthenticateUser::class);
+Route::get('/settings', [ProfileController::class, 'settings'])->name('settings.show')->middleware(AuthenticateUser::class);
 
-Route::post('/settings/update', [ProfileController::class, 'updater'])->name('settings.update');
-Route::post('/settings/delete', [ProfileController::class, 'deleter'])->name('settings.delete');
+Route::get('/settings/update', [ProfileController::class, 'update'])->name('settings.update');
+Route::get('/settings/delete', [ProfileController::class, 'delete'])->name('settings.delete');
+Route::post('/settings/update', [ProfileController::class, 'change'])->name('settings.change');
+Route::post('/settings/delete', [ProfileController::class, 'destroy'])->name('settings.destroy');
 
 // Inventory Routes
 
-Route::resource('/stocks', StockController::class)->missing(function () {
+Route::resource('/stocks', StockController::class)->middleware(AuthenticateUser::class)->missing(function () {
     return redirect()->route('stocks.index');
 });
