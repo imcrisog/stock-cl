@@ -20,11 +20,20 @@ class StockController extends Controller
         $role = auth()->user()->role;
         $stock = $stocks->first();
 
+        $findStock = null;
+        if ($request->has('search')) $findStock = $this->doSearchIndex($request->search);
+        
         $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
             return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'E', 'ARO','STOCK O.', 'STOCK R.', 'PRECIO LISTA', 'PROVEEDOR']);
         });
 
-        return view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns'));
+        return empty ($findStock) ? view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns')) : view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'findStock'));
+    }
+
+    public function doSearchIndex($search)
+    {
+        $search = strtoupper($search);
+        return Stock::whereAny(['CODIGO', 'MARCA', 'MODELO'],'LIKE', '%'.$search.'%')->get();
     }
 
     public function create(Stock $stock)
