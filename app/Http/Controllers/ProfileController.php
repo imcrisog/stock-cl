@@ -3,48 +3,77 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function settings(Request $req) 
+    public function settings(Request $request) 
+    {
+        $role = auth()->user()->role;
+        $user = auth()->user();
+
+        return view('Profile.settings', compact('user', 'role'));
+    }
+
+    public function update(Request $request) 
+    {
+        $role = auth()->user()->role;
+        $user = auth()->user();
+        return view('Profile.update', compact('user', 'role'));
+    }
+
+    public function delete(Request $request) 
+    {
+        $role = auth()->user()->role;
+        $user = auth()->user();
+        return view('Profile.delete', compact('user', 'role'));
+    }
+
+    public function change(Request $request) 
     {
         $user = auth()->user();
-        return view('Profile.settings', compact('user'));
-    }
-
-    public function updater(Request $req) 
-    {
-        $user =  $req->validate([
-            'name' => 'required',
-            'password' => 'required|min:6',
+        $vals =  $request->validate([
+            'name' => 'string',
+            'oldEmail' => 'required|email',
+            'email' => 'string',
+            'password' => 'string',
         ]);
 
-        $findUser = User::where('name', '=', $req->name)->first();
+        if ($user->email !== $vals['oldEmail']) return back()->withErrors(['oldEmail' => 'Invalid Email']);
+
+        $findUser = User::where('email', '=', $request->oldEmail)->first();
 
         if (!$findUser) return back()->withErrors([
             'name' => 'User does not exist',
         ]);
 
-        $findUser->update($user);
+        $findUser->update(array_filter($vals));
 
-        return redirect()->route('home');
+        return redirect()->route('settings.show');
     }
 
-    public function deleter(Request $req) 
+    public function destroy(Request $request)
     {
-        $req->only('name', 'password');
-        $user = $req->only('name', 'password');
-        $findUser = User::where('name', '=', $req->name)->first();
+        $user = auth()->user();
 
-        if (!$findUser) return back()->withErrors([
-            'name' => 'User does not exist',
+        $vals =  $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:4',
         ]);
+
+        if ($user->email !== $vals['email'] || Hash::check($vals['password'], $user->password)) 
+        {
+            return back()->withErrors([
+                'email' => 'Invalid Email'
+            ]);
+        }
+        $findUser = User::where('email', '=', $request->email)->first();
+        if (!$findUser) return back()->withErrors();
 
         $findUser->delete();
 
-        return redirect()->route('index');
+        return redirect()->route('auth.login.show');
 
     }
 }

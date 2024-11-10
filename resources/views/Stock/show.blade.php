@@ -23,6 +23,7 @@
         </button>
         <div id="formDeleter" class="opacity-0 z-30 transition-opacity absolute w-full h-auto">
             <section id="deleter" class="absolute m-auto left-1/2 top-1/2 -ml-[40%] mt-[20%] bg-slate-700 rounded-md hidden z-30 transition-opacity p-2 select-none">
+
                 <div class="relative h-full w-full p-4 pt-8">
                     <button id="backDeleter" class="absolute top-0 left-0 rounded-md border-[1px] border-gray-400 hover:bg-gray-500 font-extrabold p-[0.25rem]">
                         <svg  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
@@ -33,11 +34,13 @@
                         <div class="inline-flex flex-col justify-center items-center text-center">
                             <span class="font-bold text-xl">¿Estás seguro de que quieres <strong class="">ELIMINAR</strong> este objeto?</span>
                             <span class="font-semibold text-green-500 text-lg"> "<strong class="text-red-400">{{strtoupper($stock->CODIGO)}}</strong>"</span>
-                        </div>  
-        
-                        <div class="mx-auto border-t-[1px] border-slate-400 flex justify-center py-2">
-                            <button class="font-bold border-2 border-red-500 transform duration-150 hover:bg-red-600 rounded-md py-2 px-4">Eliminar</button>
                         </div>
+                        
+                        @if($user->role_id <= 2)
+                            <div class="mx-auto border-t-[1px] border-slate-400 flex justify-center py-2">
+                                <button class="font-bold border-2 border-red-500 transform duration-150 hover:bg-red-600 rounded-md py-2 px-4">Eliminar</button>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </section>
