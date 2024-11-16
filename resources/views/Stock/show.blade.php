@@ -22,7 +22,8 @@
             <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7h16" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /><path d="M10 12l4 4m0 -4l-4 4" /></svg>
         </button>
         <div id="formDeleter" class="opacity-0 z-30 transition-opacity absolute w-full h-auto">
-            <section id="deleter" class="fixed left-1/2 -translate-x-[30%] top-1/3 m-auto bg-slate-700 rounded-md hidden z-30 transition-opacity p-2 select-none">
+            <section id="deleter" class="absolute m-auto left-1/2 top-1/2 -ml-[40%] mt-[20%] bg-slate-700 rounded-md hidden z-30 transition-opacity p-2 select-none">
+
                 <div class="relative h-full w-full p-4 pt-8">
                     <button id="backDeleter" class="absolute top-0 left-0 rounded-md border-[1px] border-gray-400 hover:bg-gray-500 font-extrabold p-[0.25rem]">
                         <svg  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
