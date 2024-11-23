@@ -38,4 +38,9 @@ class Stock extends Model
         'V.T.O',
         'TOTALES',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'CODIGO';
+    }
 }
