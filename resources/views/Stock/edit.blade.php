@@ -7,7 +7,7 @@
 <div class="w-auto h-1/2 m-auto bg-slate-800 rounded-md p-2 pt-4 relative">
     
     <span class="text-2xl font-bold flex w-full justify-center">Editar una o más caracteristicas: <strong class="text-sky-400">{{$stock->CODIGO}}</strong></span>
-    <form action="{{route('stocks.update', $stock->id)}}" method="post" class="space-y-2">
+    <form action="{{route('stocks.update', $stock->CODIGO)}}" method="post" class="space-y-2">
         @csrf
         @method('PUT')
         <div class="grid grid-cols-5 grid-rows-3 my-2 gap-2 ">
