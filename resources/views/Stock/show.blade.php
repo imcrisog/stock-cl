@@ -13,8 +13,9 @@
             @foreach($stocksColumns as $key => $value)
                 <div class="flex flex-col gap-x-2 max-w-sm">
                     <span class="font-bold">{{$value}}:</span>
-                    <span class="font-light">{{$stock->$value}}</span>
+                    <span class="font-light">{{ $stock->$value }}</span>
                 </div>
+                
             @endforeach
         </div>
 
