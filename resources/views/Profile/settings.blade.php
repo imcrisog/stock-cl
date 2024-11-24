@@ -3,12 +3,12 @@
 
 @section('content')
 <div class="w-full m-auto inline-flex">
-    <div class="bg-slate-800 rounded-md p-4 flex flex-col justify-center items-center mx-auto w-1/2">
+    <div class="bg-slate-800 rounded-md p-4 flex flex-col justify-center items-center mx-auto w-full md:w-1/2">
         <div class="flex justify-start w-full my-2">
             <span class="text-2xl font-bold">Configuración de usuario</span>
         </div>
         <section class="grid grid-cols-2 w-full">
-            <div class="rounded-full bg-slate-600 w-1/2 my-2 text-slate-700 flex justify-center items-center mx-auto">
+            <div class="rounded-full bg-slate-600 md:w-1/2 my-2 text-slate-700 flex justify-center items-center mx-auto w-full">
                 <svg class="w-full size-full" width="24" height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" /><path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" /></svg>
             </div>
             <div class="inline-flex flex-col">
