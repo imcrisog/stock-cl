@@ -23,7 +23,7 @@
             <div class="inline-flex w-full justify-center">
                 <input type="email" autocomplete="off" name="oldEmail" id="oldEmail" class="w-1/2 bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="Antiguo Email">
             </div>
-            <section class="grid grid-cols-3 grid-rows-1 gap-2">
+            <section class="flex flex-col md:grid md:grid-cols-3 md:grid-rows-1 gap-2">
                 
                 <div class="inline-flex w-full justify-center">
                     <input type="text" autocomplete="off" name="name" id="name" class="bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="Nuevo nombre">
