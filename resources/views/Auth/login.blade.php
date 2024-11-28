@@ -3,8 +3,8 @@
 @section('title', 'Login')
 
 @section('content')
-<div class="w-full h-screen flex bg-slate-900 text-black">
-    <div class=" w-1/2 h-1/2 rounded-md bg-slate-800 flex flex-col justify-center items-center m-auto">
+<div class="w-full h-screen flex bg-slate-900">
+    <div class="w-3/4 md:w-1/2 h-1/2 rounded-md bg-slate-800 flex flex-col justify-center items-center m-auto">
         <form action="{{ route('auth.login.store') }}" method="post" class="text-white flex flex-col gap-y-2">
             <h2 class="font-bold text-2xl">Stock Cl</h2>
             @csrf
@@ -27,10 +27,10 @@
                 <input type="password" name="password" id="password" placeholder=" " class="w-full rounded-md p-2 text-black" autocomplete="off" required>
             </div>
             <div class="mx-6 justify-between flex items-center font-bold select-none">
-                <input type="checkbox" name="remember" id="rememberme" class="rounded-full p-2">
+                <input type="checkbox" name="remember" id="rememberme" class="rounded-full p-4 size-6 border-2 border-sky-400">
                 <label for="rememberme" class="font-semibold text-gray-300">Recordarme</label>
             </div>
-            <div class="m-auto justify-center flex items-center font-bold">
+            <div class="m-auto justify-center flex items-center font-bold my-6">
                 <button class="border-2 border-sky-300 rounded-md p-2 px-4 transform duration-150 hover:bg-sky-500 hover:text-slate-700">Iniciar sesión</button>
             </div>
         </form>
