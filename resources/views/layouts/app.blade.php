@@ -24,13 +24,13 @@
             </div>
         </nav>
 
-        <section id="menu" class="z-[50] block md:hidden fixed bottom-0 right-0 m-4 border-[1px] border-sky-600 active:bg-sky-700 p-2 transform duration-150 active:scale-90 hover:bg-sky-800">
+        <section id="menu" style="z-index: 50;" class="block md:hidden fixed bottom-0 right-0 m-4 border-[1px] border-sky-600 active:bg-sky-700 p-2 transform duration-150 active:scale-90 hover:bg-sky-800">
             <span>
                 <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
             </span>
         </section>
 
-        <aside id="sidebar" class="fixed bottom-0 left-0 w-full md:w-1/6 h-full bg-slate-950 justify-start z-20 hidden md:block">
+        <aside id="sidebar" style="display: none;" class="fixed bottom-0 left-0 w-full md:w-1/6 h-full bg-slate-950 justify-start z-20 md:block">
             <div class="flex justify-center items-center w-full mb-2 border-b-[1px] border-slate-700 p-2">  
                 <a href="{{route('home')}}" class="text-2xl font-bold mx-auto">Stock Cl</a> 
             </div>
