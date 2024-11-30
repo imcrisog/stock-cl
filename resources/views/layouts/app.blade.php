@@ -65,7 +65,7 @@
                         </li>
                     </ul>
                 </nav>
-                <button id="toggle-sidebar" aria-label="Toggle Sidebar" class="absolute -right-4 top-1/2 transform -translate-y-1/2 bg-slate-950 text-white p-2 rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-all duration-200">
+                <button id="toggle-sidebar" aria-label="Toggle Sidebar" style="right: -1.25rem;" class="absolute top-1/2 transform -translate-y-1/2 bg-slate-950 text-white p-2 rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-all duration-200">
                 <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-square-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 16l4 -4l-4 -4" /><path d="M8 12h8" /><path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /></svg>
                 </button>
             </div>
