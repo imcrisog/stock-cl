@@ -8,7 +8,7 @@ use App\Models\Stock;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class InvSpeController extends Controller
+class SecretaryController extends Controller
 {
     public function home(User $user) 
     {
