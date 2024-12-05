@@ -9,11 +9,10 @@
         <span class="text-2xl font-bold">Añadir un objeto</span>
     </div>
 
-    <form action="{{route('stocks.store')}}" method="post" class="space-y-2 flex flex-col my-2">
+    <form action="{{route('stocks.store')}}" method="POST" class="space-y-2 flex flex-col my-2">
         <div class="grid grid-cols-3 md:grid-cols-5 grid-rows-3 gap-2 ">
             @foreach($stocksColumns as $key => $value)
                 <div class="flex justify-center">
-                    <label for="{{$value}}"></label>
                     <input required type="text" autocomplete="off" maxlength="20" name="{{$value}}" id="{{$value}}" class="w-3/4 bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="{{$value}}">
                 </div>
             @endforeach
