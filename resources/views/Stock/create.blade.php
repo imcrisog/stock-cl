@@ -10,6 +10,7 @@
     </div>
 
     <form action="{{route('stocks.store')}}" method="POST" class="space-y-2 flex flex-col my-2">
+        @csrf
         <div class="grid grid-cols-3 md:grid-cols-5 grid-rows-3 gap-2 ">
             @foreach($stocksColumns as $key => $value)
                 <div class="flex justify-center">
