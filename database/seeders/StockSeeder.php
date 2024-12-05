@@ -2,50 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Roles;
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash; 
 use Illuminate\Support\Facades\DB;
 
-class DatabaseSeeder extends Seeder
+class StockSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'TestAdmin',
-            'email' => 'test@example.com',
-            'password' => 'test',
-            'role_id' => '1',
-        ]);
-
-        User::factory()->create([
-            'name' => 'TestVendedor',
-            'email' => 'test@seller.com',
-            'password' => 'test',
-            'role_id' => '3',
-        ]);
-
-        Roles::create([
-            'id' => '1',
-            'name' => 'admin',
-        ]);
-        
-        Roles::create([
-            'id' => '2',
-            'name' => 'secretario',
-        ]);
-        
-        Roles::create([
-            'id' => '3',
-            'name' => 'vendedor',
-        ]);
-
         DB::table('stocks')->insert([
             ['CODIGO' => 'NEUADVA0002', 'MARCA' => 'ADVANCE', 'MODELO' => 'NHS L4A TL', 'ANCHO' => 10.0, 'PERFIL' => 'X', 'E' => '', 'ARO' => '05/16/2024', 'TIPO' => 'L4A TL', 'TELAS' => '12PR', 'I_C' => '', 'I_V' => '', 'FAB' => '', 'C_C_IVA' => 1000, 'C_NETO' => '840.336134453782', 'PCP' => '20%', 'PPP' => '10%', 'PPS' => '15%', 'PL' => '20%', 'FLETE' => 1000, 'C_P' => 2200, 'P_DIST' => 2100, 'MBV' => 2200, 'PRECIO_LISTA' => 2200, 'PROVEEDOR' => 'PROVEE 1', 'STOCK_R' => '#N/A', 'STOCK_O' => '#REF!', 'V_TR' => '#N/A', 'V_TO' => '#REF!', 'TOTALES' => '#N/A'],
             ['CODIGO' => 'NEUKAPS2001', 'MARCA' => 'KASPEN', 'MODELO' => 'HS101 DIR/CAR', 'ANCHO' => 11.0, 'PERFIL' => 'R', 'E' => '', 'ARO' => '05/22/2024', 'TIPO' => '', 'TELAS' => '16PR', 'I_C' => '', 'I_V' => '', 'FAB' => 'CHI', 'C_C_IVA' => 2000, 'C_NETO' => '1680.67226890756', 'PCP' => '20%', 'PPP' => '10%', 'PPS' => '15%', 'PL' => '20%', 'FLETE' => 1000, 'C_P' => 3400, 'P_DIST' => 3200, 'MBV' => 3300, 'PRECIO_LISTA' => 3400, 'PROVEEDOR' => 'PROVEE 2', 'STOCK_R' => '#N/A', 'STOCK_O' => '#REF!', 'V_TR' => '#N/A', 'V_TO' => '#REF!', 'TOTALES' => '#N/A'],
