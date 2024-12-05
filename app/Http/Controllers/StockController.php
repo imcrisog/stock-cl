@@ -64,7 +64,7 @@ class StockController extends Controller
         $findDuplicate = Stock::where('CODIGO', $request->input('CODIGO'))->first();
         
         if($findDuplicate) return back()->withErrors(['CODIGO' => 'El stock ya existe']);
-        
+
         $stock = Stock::create($request->all()); // Should be validated
 
         return redirect()->route('stocks.show', $stock->CODIGO);
