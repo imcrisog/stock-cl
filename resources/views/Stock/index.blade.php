@@ -29,7 +29,7 @@ if ($isMobile)
             @endif
             <div class="flex-inline items-center text-gray-900 font-medium w-full">
                     <form action="{{route('stocks.index', request()->search);}}" method="post" id="searchForm">
-                        <input type="text" name="search" placeholder="Buscar por Codigo, Marca o Modelo..." autocomplete="off" id="searcher" value="" onkeyup="search(this);" class="w-full p-2 rounded-md bg-slate-600 text-white border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="search" placeholder="Buscar por Ancho, Perfil o Aro..." autocomplete="off" id="searcher" value="" onkeyup="search(this);" class="w-full p-2 rounded-md bg-slate-600 text-white border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
                     </form>
             </div>
             @if ($role->id <= 2)
@@ -57,16 +57,17 @@ if ($isMobile)
                     @foreach($stocksColumns as $key => $value) 
                         <td class="w-[3%] font-semibold">{{ $stock->$value }}</td>
                     @endforeach
-                <td class="w-1/6 h-full inline-flex items-center justify-center space-x-2 py-2">
-                    <a href="{{ route('stocks.show', $stock->CODIGO) }}" class="border-2 border-gray-500 transform duration-100 hover:bg-gray-500 rounded-md px-2 py-2">
-                        <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-circle-horizontal"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M8 12l0 .01" /><path d="M12 12l0 .01" /><path d="M16 12l0 .01" /></svg>
-                    </a>
-                @if ($role->id <= 2)
-                    <a href="{{route('stocks.edit', $stock->CODIGO)}}" class="border-2 border-blue-500 transform duration-100 hover:bg-blue-500 rounded-md px-2 py-2">
-                        <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
-                    </a>
-                @endif
-                </td>
+                    <td class="w-1/6 h-full inline-flex items-center justify-center space-x-2 py-2">
+                        <a href="{{ route('stocks.show', $stock->CODIGO) }}" class="border-2 border-gray-500 transform duration-100 hover:bg-gray-500 rounded-md px-2 py-2">
+                            <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-circle-horizontal"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M8 12l0 .01" /><path d="M12 12l0 .01" /><path d="M16 12l0 .01" /></svg>
+                        </a>
+                    @if ($role->id <= 2)
+                        <a href="{{route('stocks.edit', $stock->CODIGO)}}" class="border-2 border-blue-500 transform duration-100 hover:bg-blue-500 rounded-md px-2 py-2">
+                            <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
+                        </a>
+                    @endif
+                    </td>
+                <tr/>
             @endforeach
         @else
             @foreach($stocks as $key => $stock)

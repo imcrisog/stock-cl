@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
 {
+    protected $primaryKey = 'CODIGO';
+    public $incrementing = false;
+
     protected $fillable = [
         'CODIGO',
         'MARCA',
