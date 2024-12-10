@@ -31,6 +31,6 @@ Route::post('/settings/delete', [ProfileController::class, 'destroy'])->name('se
 
 // Inventory Routes
 
-Route::resource('/stocks', StockController::class)->middleware(AuthenticateUser::class)->missing(function () {
+Route::resource('/stocks', StockController::class)->missing(function () {
     return redirect()->route('stocks.index');
 });

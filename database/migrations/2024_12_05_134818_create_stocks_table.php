@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('CODIGO', 12)->nullable();
             $table->string('MARCA', 12)->nullable();
             $table->string('MODELO', 19)->nullable();
+            $table->date('DOT')->nullable();
+            $table->string('OE', 29)->nullable();
             $table->decimal('ANCHO', 3, 1)->nullable();
             $table->string('PERFIL', 10)->nullable();
             $table->string('E', 1)->nullable();

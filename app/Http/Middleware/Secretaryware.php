@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class InveSpeware
+class Secretaryware
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,11 @@ class InveSpeware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()-check()) {
+        if (!(auth()->check())) {
             return redirect()->route('auth.login.show');
         }
 
-        if (auth()->user()->role_id !== 3) {
+        if (auth()->user()->role_id > 2) {
             return redirect()->route('home');
         }
 
