@@ -3,17 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\AuthenticateUser;
+use App\Http\Middleware\Secretaryware;
 use App\Http\Requests\StockStoreFormRequest;
 use App\Models\Stock;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Routing\Controllers\Middleware;
 
-class StockController extends Controller
+class StockController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware(AuthenticateUser::class),
+            new Middleware(Secretaryware::class, except: ['index']),
+        ];
+    }
+
     public function index(Request $request)
     {
-        $stocks = Stock::paginate($request->perPage ?? session()->get('perPage', 5));
+        $stocks = Stock::simplePaginate($request->perPage ?? session()->get('perPage', 5));
         
         if (isset($request->perPage)) session()->put('perPage', $request->perPage);
         
@@ -23,10 +35,17 @@ class StockController extends Controller
 
         $findStock = null;
         if ($request->has('search')) $findStock = $this->doSearchIndex($request->search);
-        
+
         $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
-            return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','STOCK O.', 'STOCK R.', 'PRECIO LISTA', 'PROVEEDOR']);
+            return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'P_DIST', 'MBV', 'PRECIO_LISTA', 'STOCK_R', 'STOCK_O', 'DOT', 'OE']);
         });
+        
+        // Not viable
+        if ($role->id <= 2) {
+            $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
+                return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'C_C_IVA', 'DOT', 'OE']);
+            });
+        }
 
         return empty ($findStock) ? view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns')) : view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'findStock'));
     }

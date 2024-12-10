@@ -9,11 +9,14 @@ class Stock extends Model
     protected $primaryKey = 'CODIGO';
     public $incrementing = false;
     public $timestamps = false;
+    protected $dates = ['DOT'];
 
     protected $fillable = [
         'CODIGO',
         'MARCA',
         'MODELO',
+        'DOT',
+        'OE',
         'ANCHO',
         'PERFIL',
         'E',

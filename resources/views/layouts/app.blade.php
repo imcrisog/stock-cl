@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
             }
 
             #content {
-                width: 83%;
+                width: 100%;
             }
 
         }
@@ -42,13 +42,14 @@
             </div>
         </nav>
         
-        <div id="sidebar" class="z-30 fixed top-0 left-0 h-full w-64 bg-slate-950 text-white transform transition-transform duration-300 ease-in-out shadow-lg rounded-r-xl">
-            <div class="flex flex-col h-full p-4 space-y-6">
+        <div id="sidebar" class="z-30 fixed top-0 left-0 h-full w-64 bg-slate-950 text-white translate-x-[-100%] transform transition-transform duration-300 ease-in-out shadow-lg rounded-r-xl">
+            <div class="flex flex-col h-full p-4 space-y-6 relative">
                 <div class="flex items-center justify-center py-4 border-b-[1px] border-gray-600">
                     <span class="text-2xl font-bold">
                         STOCK-CL
                     </span>
                 </div>
+
                 <nav class="flex-grow">
                     <ul class="space-y-4">
                         <li>
@@ -65,6 +66,16 @@
                         </li>
                     </ul>
                 </nav>
+                
+                <div class="flex flex-row fixed bottom-5 -left-0 items-center justify-start py-4 bg-slate-900 w-full gap-2 px-4">
+                    <div class="flex rounded-lg bg-slate-800">
+                        <span class="text-xl py-2 px-4">{{$user->name[0]}}</span>
+                    </div>
+                    <div class="flex text-balance ">
+                        <span class="font-bold text-lg">{{ucfirst($role->name)}}</span> 
+                    </div>
+                </div>
+
                 <button id="toggle-sidebar" aria-label="Toggle Sidebar" style="right: -1.2rem;" class="absolute top-1/2 transform -translate-y-1/2 bg-slate-950 text-white p-2 py-6 rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-all duration-200">
                 <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-square-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 16l4 -4l-4 -4" /><path d="M8 12h8" /><path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /></svg>
                 </button>
@@ -82,7 +93,7 @@
     const content = document.getElementById('content');
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('toggle-sidebar');
-    let isOpen = true;
+    let isOpen = false;
 
     toggleBtn.addEventListener('click', () => {
         isOpen = !isOpen;

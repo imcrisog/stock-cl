@@ -8,10 +8,14 @@ use App\Models\Stock;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SecretaryController extends Controller
+class SecretaryController extends StockController
 {
-    public function home(User $user) 
+    public function index(Request $request)
     {
-        return redirect()->route('home', compact('user'));
+        $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
+            return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO']);
+        });
+
+        return $stocksColumns;
     }
 }
