@@ -13,7 +13,7 @@ if ($isMobile)
   });
 } ?>
 
-<div class="m-0 my-2 mb-4 md:mb-4 md:m-4 min-w-[full] w-full h-full flex bg-slate-800 rounded-md flex-col z-[1]">
+<div class="m-0 my-2 mb-4 md:mb-4 md:m-4 w-full h-full flex bg-slate-800 rounded-md flex-col z-[1]">
     <div class="w-auto m-4 mb-0 flex flex-row justify-between items-center">
         <div class="hidden md:inline-flex items-center gap-2">
             <span>
@@ -47,51 +47,53 @@ if ($isMobile)
 
                     <th class=" w-[3%] font-semibold border-r-[1px] border-gray-400">{{ $value }}</th>
                 @endforeach
-                <th class="w-[3%] font-semibold">Acciones</th>
+                @if ($role->id <= 2)
+                    <th class="w-[3%] font-semibold">Acciones</th>
+                @endif
             </tr>
         </thead>
         <tbody id="table-body">
         @if (!empty($findStock))
             @foreach($findStock as $key => $stock)
-                <tr class="h-[8%] md:h-auto border-b-[1px] border-slate-500" id="tr">
+                <tr class="h-4 border-b-[1px] border-slate-500" id="tr">
                     @foreach($stocksColumns as $key => $value) 
-                        <td class="w-[3%] font-semibold">{{ $stock->$value }}</td>
+                        <td class="w-[3%] font-semibold py-2">{{ $stock->$value }}</td>
                     @endforeach
-                    <td class="w-1/6 h-full inline-flex items-center justify-center space-x-2 py-2">
-                        <a href="{{ route('stocks.show', $stock->CODIGO) }}" class="border-2 border-gray-500 transform duration-100 hover:bg-gray-500 rounded-md px-2 py-2">
-                            <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-circle-horizontal"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M8 12l0 .01" /><path d="M12 12l0 .01" /><path d="M16 12l0 .01" /></svg>
-                        </a>
                     @if ($role->id <= 2)
-                        <a href="{{route('stocks.edit', $stock->CODIGO)}}" class="border-2 border-blue-500 transform duration-100 hover:bg-blue-500 rounded-md px-2 py-2">
-                            <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
-                        </a>
+                        <td class="w-1/6 h-full inline-flex items-center justify-center space-x-2 py-2">
+                            <a href="{{ route('stocks.show', $stock->CODIGO) }}" class="border-2 border-gray-500 transform duration-100 hover:bg-gray-500 rounded-md px-2 py-2">
+                                <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-circle-horizontal"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M8 12l0 .01" /><path d="M12 12l0 .01" /><path d="M16 12l0 .01" /></svg>
+                            </a>
+                            <a href="{{route('stocks.edit', $stock->CODIGO)}}" class="border-2 border-blue-500 transform duration-100 hover:bg-blue-500 rounded-md px-2 py-2">
+                                <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
+                            </a>
+                        </td>
                     @endif
-                    </td>
                 <tr/>
             @endforeach
         @else
             @foreach($stocks as $key => $stock)
             <tr class="h-[8%] md:h-[1rem] border-b-[1px] border-slate-500" id="tr">
                 @foreach($stocksColumns as $key => $value)
-                    <td class="w-[3%] font-semibold">{{ $stock->$value }}</td>
+                    <td class="w-[3%] font-semibold py-2">{{ $stock->$value }}</td>
                 @endforeach
-                
+
+                @if ($role->id <= 2)
                 <td class="w-1/6 h-full inline-flex items-center justify-center space-x-2 py-2">
-                    <a href="{{ route('stocks.show', $stock->CODIGO) }}" class="border-2 border-gray-500 transform duration-100 hover:bg-gray-500 rounded-md px-2 py-2">
+                    <a href="{{ route('stocks.show', $stock->CODIGO) }}" class="border-2 border-gray-500 transform duration-100 hover:bg-gray-500 rounded-md p-2">
                         <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-circle-horizontal"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M8 12l0 .01" /><path d="M12 12l0 .01" /><path d="M16 12l0 .01" /></svg>
                     </a>
-                    @if ($role->id <= 2)
-                        <a href="{{route('stocks.edit', $stock->CODIGO)}}" class="border-2 border-blue-500 transform duration-100 hover:bg-blue-500 rounded-md px-2 py-2">
-                            <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
-                        </a>
-                    @endif
+                    <a href="{{route('stocks.edit', $stock->CODIGO)}}" class="border-2 border-blue-500 transform duration-100 hover:bg-blue-500 rounded-md p-2">
+                        <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
+                    </a>
                 </td>
+                @endif
             </tr>
             @endforeach
         @endif
         </tbody>
     </table>
-    <div class="inline-flex items-center justify-center p-2 w-auto max-w-[35rem] gap-2">
+    <div class="inline-flex items-center justify-center p-2 w-auto max-w-fit gap-2 text-balance">
         {{$stocks->links()}}
         <div>
             <select name="perPage" id="perPage" class="w-auto rounded-md bg-sky-300 p-2 text-black font-semibold border-2 border-slate-500">

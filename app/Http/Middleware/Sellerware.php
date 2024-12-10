@@ -15,11 +15,11 @@ class Sellerware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()-check()) {
+        if (!(auth()->check())) {
             return redirect()->route('auth.login.show');
         }
 
-        if (auth()->user()->role_id !== 3) {
+        if (auth()->user()->role_id > 3) {
             return redirect()->route('home');
         }
 
