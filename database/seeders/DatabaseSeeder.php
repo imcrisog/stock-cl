@@ -31,6 +31,13 @@ class DatabaseSeeder extends Seeder
             'role_id' => '3',
         ]);
 
+        User::factory()->create([
+            'name' => 'TestSecretaria',
+            'email' => 'test@secretary.com',
+            'password' => 'test',
+            'role_id' => 2,
+        ]);
+
         Roles::create([
             'id' => '1',
             'name' => 'admin',
