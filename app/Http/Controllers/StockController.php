@@ -37,13 +37,13 @@ class StockController extends Controller implements HasMiddleware
         if ($request->has('search')) $findStock = $this->doSearchIndex($request->search);
 
         $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
-            return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'P_DIST', 'MBV', 'PRECIO_LISTA', 'STOCK_R', 'STOCK_O', 'DOT', 'OE']);
+            return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'P_DIST', 'MBV', 'PRECIO_LISTA', 'STOCK_R', 'STOCK_O', 'DOT', 'OE', 'T']);
         });
         
         // Not viable
         if ($role->id <= 2) {
             $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
-                return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'C_C_IVA', 'DOT', 'OE']);
+                return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'C_C_IVA', 'DOT', 'OE', 'T']);
             });
         }
 
@@ -112,7 +112,42 @@ class StockController extends Controller implements HasMiddleware
     {
         if (!$stock) return back()->withErrors('Stock no encontrado');
         
-        $editStock = $request->all();
+        $editStock = $request->validate(
+            [
+                'CODIGO' => 'nullable|string|unique:stocks,CODIGO',
+                'MARCA' => 'nullable|string',
+                'MODELO' => 'nullable|string',
+                'DOT' => 'nullable|date',
+                'OE' => 'nullable|string',
+                'ANCHO' => 'nullable|numeric|min:0.1',
+                'PERFIL' => 'nullable|string',
+                'E' => 'nullable|string',
+                'ARO' => 'nullable|string',
+                'TIPO' => 'nullable|string',
+                'TELAS' => 'nullable|string',
+                'I_C' => 'nullable|string',
+                'I_V' => 'nullable|string',
+                'FAB' => 'nullable|string',
+                'C_C_IVA' => 'nullable|numeric|min:0',
+                'C_NETO' => 'nullable|string',
+                'PCP' => 'nullable|numeric|min:0',
+                'PPP' => 'nullable|numeric|min:0',
+                'PPS' => 'nullable|numeric|min:0',
+                'PL' => 'nullable|numeric|min:0',
+                'FLETE' => 'nullable|numeric|min:0',
+                'C_P' => 'nullable|numeric|min:0',
+                'P_DIST' => 'nullable|numeric|min:0',
+                'MBV' => 'nullable|numeric|min:0',
+                'PRECIO_LISTA' => 'nullable|numeric|min:0',
+                'PROVEEDOR' => 'nullable|string',
+                'STOCK_R' => 'nullable|string',
+                'STOCK_O' => 'nullable|string',
+                'V_TR' => 'nullable|string',
+                'V_TO' => 'nullable|string',
+                'TOTALES' => 'nullable|string',
+                'T' => 'nullable|numeric',
+            ]
+        );
 
         $stock->update(array_filter($editStock));
 

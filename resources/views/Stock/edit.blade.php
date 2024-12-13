@@ -14,11 +14,11 @@
             @foreach($stocksColumns as $key => $value)
             @if($value == 'DOT')
                 <div class="flex justify-center">
-                    <input required type="date" autocomplete="off" maxlength="20" name="{{$value}}" id="{{$value}}" class="w-3/4 bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="{{$value}}">
+                    <input type="date" autocomplete="off" maxlength="20" name="{{$value}}" id="{{$value}}" class="w-3/4 bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="{{$value}}">
                 </div>
             @else
                 <div class="flex justify-center">
-                    <input required type="text" autocomplete="off" maxlength="20" name="{{$value}}" id="{{$value}}" class="w-3/4 bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="{{$value}}">
+                    <input type="text" autocomplete="off" maxlength="20" name="{{$value}}" id="{{$value}}" class="w-3/4 bg-slate-800 border-2 border-blue-300 font-semibold p-2 rounded-md" placeholder="{{$value}}">
                 </div>
             @endif
             @endforeach

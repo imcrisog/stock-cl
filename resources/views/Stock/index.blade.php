@@ -9,11 +9,11 @@ $isMobile = preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry
 if ($isMobile) 
 {
   $stocksColumns = array_filter($stocksColumns, function ($elem) {
-    return in_array($elem, ['CODIGO']);
+    return in_array($elem, ['CODIGO', 'MODELO']);
   });
 } ?>
 
-<div class="m-0 my-2 mb-4 md:mb-4 md:m-4 w-full h-full flex bg-slate-800 rounded-md flex-col z-[1]">
+<div class="m-0 my-2 mb-4 md:mb-4 md:m-4 w-full h-full flex bg-slate-800 rounded-md flex-col z-[1] overflow-auto">
     <div class="w-auto m-4 mb-0 flex flex-row justify-between items-center">
         <div class="hidden md:inline-flex items-center gap-2">
             <span>
@@ -40,14 +40,14 @@ if ($isMobile)
         </section>
 
     </div>
-    <table class="items-center text-center m-0 md:m-2" id="table">
+    <table class="items-center text-center m-0 md:m-2 overflow-auto" id="table">
         <thead class="bg-slate-700 border-t-2 border-b-2 border-gray-500 h-[10%]">
             <tr>
                 @foreach($stocksColumns as $key => $value)
 
                     <th class=" w-[3%] font-semibold border-r-[1px] border-gray-400">{{ $value }}</th>
                 @endforeach
-                @if ($role->id <= 2)
+                @if ($role->id === 1)
                     <th class="w-[3%] font-semibold">Acciones</th>
                 @endif
             </tr>
@@ -59,7 +59,7 @@ if ($isMobile)
                     @foreach($stocksColumns as $key => $value) 
                         <td class="w-[3%] font-semibold py-2">{{ $stock->$value }}</td>
                     @endforeach
-                    @if ($role->id <= 2)
+                    @if ($role->id === 1)
                         <td class="w-1/6 h-full inline-flex items-center justify-center space-x-2 py-2">
                             <a href="{{ route('stocks.show', $stock->CODIGO) }}" class="border-2 border-gray-500 transform duration-100 hover:bg-gray-500 rounded-md px-2 py-2">
                                 <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-circle-horizontal"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M8 12l0 .01" /><path d="M12 12l0 .01" /><path d="M16 12l0 .01" /></svg>
@@ -78,7 +78,7 @@ if ($isMobile)
                     <td class="w-[3%] font-semibold py-2">{{ $stock->$value }}</td>
                 @endforeach
 
-                @if ($role->id <= 2)
+                @if ($role->id === 1)
                 <td class="w-1/6 h-full inline-flex items-center justify-center space-x-2 py-2">
                     <a href="{{ route('stocks.show', $stock->CODIGO) }}" class="border-2 border-gray-500 transform duration-100 hover:bg-gray-500 rounded-md p-2">
                         <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-dots-circle-horizontal"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M8 12l0 .01" /><path d="M12 12l0 .01" /><path d="M16 12l0 .01" /></svg>
