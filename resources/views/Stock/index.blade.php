@@ -13,34 +13,53 @@ if ($isMobile)
   });
 } ?>
 
-<div class="m-0 my-2 mb-4 md:mb-4 md:m-4 w-full h-full flex bg-slate-800 rounded-md flex-col z-[1] overflow-auto">
-    <div class="w-auto m-4 mb-0 flex flex-row justify-between items-center">
+<div class="relative m-0 my-2 mb-4 md:mb-4 md:m-4 w-full h-full flex bg-slate-800 rounded-md flex-col z-[1] overflow-auto scroll-smooth scroll" style="scrollbar-width: thin;">
+    <div class="w-full my-2 md:m-4 mb-0 flex flex-row justify-between items-center fixed">
         <div class="hidden md:inline-flex items-center gap-2">
             <span>
                 <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-building-warehouse"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21v-13l9 -4l9 4v13" /><path d="M13 13h4v8h-10v-6h6" /><path d="M13 21v-9a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v3" /></svg>
             </span>
             <h2 class="font-bold text-xl">Stocks</h2>
         </div>
-        <section class="flex flex-row gap-x-2 items-center w-full md:w-3/4">
+        <section class="flex flex-row gap-x-2 items-center w-screen md:w-3/4">
             @if (!empty($findStock))
                 <a href="{{route('stocks.index')}}" class="inline-flex border-2 text-gray-500 border-gray-500 hover:text-white hover:bg-gray-500 p-2 rounded-lg transform duration-150 active:scale-90 active:bg-gray-700">
                     <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-square-rounded-arrow-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2l.324 .001l.318 .004l.616 .017l.299 .013l.579 .034l.553 .046c4.785 .464 6.732 2.411 7.196 7.196l.046 .553l.034 .579c.005 .098 .01 .198 .013 .299l.017 .616l.005 .642l-.005 .642l-.017 .616l-.013 .299l-.034 .579l-.046 .553c-.464 4.785 -2.411 6.732 -7.196 7.196l-.553 .046l-.579 .034c-.098 .005 -.198 .01 -.299 .013l-.616 .017l-.642 .005l-.642 -.005l-.616 -.017l-.299 -.013l-.579 -.034l-.553 -.046c-4.785 -.464 -6.732 -2.411 -7.196 -7.196l-.046 -.553l-.034 -.579a28.058 28.058 0 0 1 -.013 -.299l-.017 -.616c-.003 -.21 -.005 -.424 -.005 -.642l.001 -.324l.004 -.318l.017 -.616l.013 -.299l.034 -.579l.046 -.553c.464 -4.785 2.411 -6.732 7.196 -7.196l.553 -.046l.579 -.034c.098 -.005 .198 -.01 .299 -.013l.616 -.017c.21 -.003 .424 -.005 .642 -.005zm.707 5.293a1 1 0 0 0 -1.414 0l-4 4a1.037 1.037 0 0 0 -.2 .284l-.022 .052a.95 .95 0 0 0 -.06 .222l-.008 .067l-.002 .063v-.035v.073a1.034 1.034 0 0 0 .07 .352l.023 .052l.03 .061l.022 .037a1.2 1.2 0 0 0 .05 .074l.024 .03l.073 .082l4 4l.094 .083a1 1 0 0 0 1.32 -.083l.083 -.094a1 1 0 0 0 -.083 -1.32l-2.292 -2.293h5.585l.117 -.007a1 1 0 0 0 -.117 -1.993h-5.585l2.292 -2.293l.083 -.094a1 1 0 0 0 -.083 -1.32z" fill="currentColor" stroke-width="0" /></svg>
                 </a>
             @endif
-            <div class="flex-inline items-center text-gray-900 font-medium w-full">
-                    <form action="{{route('stocks.index', request()->search);}}" method="post" id="searchForm">
-                        <input type="text" name="search" placeholder="Buscar por Ancho, Perfil o Aro..." autocomplete="off" id="searcher" value="" onkeyup="search(this);" class="w-full p-2 rounded-md bg-slate-600 text-white border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
+            <div class="flex-inline items-center text-gray-900 font-medium w-auto">
+                    <form action="{{route('stocks.index', request()->search);}}" class="[&>*]:rounded-md [&>*]:md:py-2 [&>*]:md:px-4 [&>*]:text-center" method="post" id="searchForm">
+                        <select class="bg-stone-400" name="width" id="width">
+                            <option value="">Ancho</option>
+                            @foreach($allWidthsAvailable as $width)
+                                <option value="{{$width}}">{{$width}}</option>
+                            @endforeach
+                        </select>
+                        <select class="bg-stone-400" name="height" id="height">
+                            <option value="">Alto</option>
+                            @foreach($allHeightsAvailable as $height)
+                                <option value="{{$height}}">{{$height}}</option>
+                            @endforeach
+                        </select>
+                        <select class="bg-stone-400" name="ring" id="rims">
+                            <option value="">Aro</option>
+                            @foreach($allRimsAvailable as $rim)
+                                <option value="{{$rim}}">{{$rim}}</option>
+                            @endforeach
+                        </select>}
+
+                        <button type="submit" class="border-2 border-rose-500 text-gray-300 font-extrabold transform duration-200 hover:scale-95 active:scale-75 active:bg-rose-400">BUSCAR</button>
                     </form>
             </div>
             @if ($role->id <= 2)
-                <a href="{{route('stocks.create')}}" class="p-[0.25rem] w-auto md:max-w-32 md:w-1/4 font-semibold bg-amber-500 hover:bg-amber-600 rounded-md md:px-4 md:py-2">
+                <a href="{{route('stocks.create')}}" class="px-[0.20rem] w-auto md:max-w-32 md:w-1/4 font-semibold bg-amber-500 hover:bg-amber-600 rounded-md md:px-4 md:py-2">
                     Añadir stock
                 </a>
             @endif
         </section>
 
     </div>
-    <table class="items-center text-center m-0 md:m-2 overflow-auto" id="table">
+    <table class="items-center text-center m-0 md:m-2 overflow-auto mt-20 md:mt-16 space-2" id="table">
         <thead class="bg-slate-700 border-t-2 border-b-2 border-gray-500 h-[10%]">
             <tr>
                 @foreach($stocksColumns as $key => $value)
@@ -110,10 +129,13 @@ if ($isMobile)
 <script>
     const perPage = document.getElementById('perPage');
     const searchForm = document.getElementById('searchForm');
+    const widthForm = document.getElementById('width');
+    const heightForm = document.getElementById('height');
+    const rimForm = document.getElementById('rims');
 
     searchForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        window.location.href = window.location.href.split('?')[0] + '?search=' + searchForm.search.value;
+        window.location.href = window.location.href.split('?')[0] + '?search=' + widthForm.value + heightForm.value + rimForm.value;
     });
 
     perPage.addEventListener('change', function() {
