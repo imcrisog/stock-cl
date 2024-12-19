@@ -32,6 +32,11 @@ class StockController extends Controller implements HasMiddleware
         $user = auth()->user();
         $role = auth()->user()->role;
         $stock = $stocks->first();
+        $allStocks = Stock::get();
+
+        $allWidthsAvailable = $allStocks->pluck('ANCHO')->unique();
+        $allHeightsAvailable = $allStocks->pluck('PERFIL')->unique();
+        $allRimsAvailable = $allStocks->pluck('ARO')->unique();
 
         $findStock = null;
         if ($request->has('search')) $findStock = $this->doSearchIndex($request->search);
@@ -42,12 +47,10 @@ class StockController extends Controller implements HasMiddleware
         
         // Not viable
         if ($role->id <= 2) {
-            $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
-                return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'C_C_IVA', 'DOT', 'OE', 'T']);
-            });
+            $stocksColumns = $stock->getFillable();
         }
 
-        return empty ($findStock) ? view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns')) : view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'findStock'));
+        return empty ($findStock) ? view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'allWidthsAvailable', 'allHeightsAvailable', 'allRimsAvailable')) : view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'findStock', 'allWidthsAvailable', 'allHeightsAvailable', 'allRimsAvailable'));
     }
 
     public function doSearchIndex($search)
@@ -60,7 +63,7 @@ class StockController extends Controller implements HasMiddleware
         $splittedSearch = str_split($search, 2);
 
         $specificSearch = Stock::whereAny(['ANCHO', 'PERFIL', 'ARO'],'LIKE', '%'.$splittedSearch[0].'%')->get();
-        $generalSearch =  Stock::whereAny(['ANCHO', 'PERFIL', 'E', 'ARO'],'LIKE', '%'.$search.'%')->get();
+        $generalSearch =  Stock::whereAny(['ANCHO', 'PERFIL', 'ARO'],'LIKE', '%'.$search.'%')->get();
         $deepSearch = Stock::whereAny(['ANCHO', 'PERFIL', 'ARO'],'LIKE', '%'.$splittedSearch[count($splittedSearch)-1].'%')->get();
 
         $mergedResults = $generalSearch->merge($specificSearch);
