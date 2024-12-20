@@ -25,14 +25,16 @@ class StockController extends Controller implements HasMiddleware
 
     public function index(Request $request)
     {
-        $stocks = Stock::simplePaginate($request->perPage ?? session()->get('perPage', 5));
+        $allStocks = Stock::get();
+        $countMaxStock = count($allStocks);
+
+        $stocks = Stock::simplePaginate($request->perPage ?? session()->get('perPage', $countMaxStock));
         
         if (isset($request->perPage)) session()->put('perPage', $request->perPage);
         
         $user = auth()->user();
         $role = auth()->user()->role;
         $stock = $stocks->first();
-        $allStocks = Stock::get();
 
         $allWidthsAvailable = $allStocks->pluck('ANCHO')->unique();
         $allHeightsAvailable = $allStocks->pluck('PERFIL')->unique();
@@ -42,7 +44,7 @@ class StockController extends Controller implements HasMiddleware
         if ($request->has('search')) $findStock = $this->doSearchIndex($request->search);
 
         $stocksColumns = array_filter($stock->getFillable(), function ($elem) {
-            return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'P_DIST', 'MBV', 'PRECIO_LISTA', 'STOCK_R', 'STOCK_O', 'DOT', 'OE', 'T']);
+            return in_array($elem, ['CODIGO', 'MARCA', 'MODELO', 'ANCHO', 'PERFIL', 'E', 'ARO','TIPO', 'TELAS', 'I_C', 'I_V', 'FAB', 'P_DIST', 'MBV', 'PRECIO_LISTA', 'STOCK_R', 'STOCK_O', 'BODEGA','DOT', 'OE', 'T']);
         });
         
         // Not viable
@@ -50,7 +52,7 @@ class StockController extends Controller implements HasMiddleware
             $stocksColumns = $stock->getFillable();
         }
 
-        return empty ($findStock) ? view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'allWidthsAvailable', 'allHeightsAvailable', 'allRimsAvailable')) : view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'findStock', 'allWidthsAvailable', 'allHeightsAvailable', 'allRimsAvailable'));
+        return empty ($findStock) ? view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'allWidthsAvailable', 'allHeightsAvailable', 'allRimsAvailable', 'countMaxStock')) : view('Stock.index', compact('stocks', 'user', 'role', 'stocksColumns', 'findStock', 'allWidthsAvailable', 'allHeightsAvailable', 'allRimsAvailable', 'countMaxStock'));
     }
 
     public function doSearchIndex($search)

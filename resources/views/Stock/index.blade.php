@@ -13,8 +13,8 @@ if ($isMobile)
   });
 } ?>
 
-<div class="relative m-0 my-2 mb-4 md:mb-4 md:m-4 w-full h-full flex bg-slate-800 rounded-md flex-col z-[1] overflow-auto scroll-smooth scroll" style="scrollbar-width: thin;">
-    <div class="w-full md:w-[95%] my-1 md:my-2 md:m-4 mb-0 flex flex-row justify-center md:justify-between items-center fixed">
+<div class="relative m-0 my-2 mb-4 md:mb-4 md:m-4 w-full h-full flex bg-slate-800 rounded-md flex-col z-[1] overflow-auto scroll-smooth " style="scrollbar-width: thin;">
+    <div class="w-full md:w-[95%] my-1 md:my-2 md:m-4 mb-0 flex flex-row justify-center md:justify-between items-center absolute">
         <div class="hidden md:inline-flex items-center gap-2">
             <span>
                 <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-building-warehouse"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21v-13l9 -4l9 4v13" /><path d="M13 13h4v8h-10v-6h6" /><path d="M13 21v-9a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v3" /></svg>
@@ -63,7 +63,7 @@ if ($isMobile)
         @endif
 
     </div>
-    <table class="items-center text-center m-0 md:m-2 overflow-auto mt-20 md:mt-16 space-2" id="table">
+    <table class="items-center text-center m-0 md:m-2 mt-20 md:mt-16 space-2 max-h-1/2" id="table">
         <thead class="bg-slate-700 border-t-2 border-b-2 border-gray-500 h-[10%]">
             <tr>
                 @foreach($stocksColumns as $key => $value)
@@ -120,7 +120,8 @@ if ($isMobile)
         {{$stocks->links()}}
         <div>
             <select name="perPage" id="perPage" class="w-auto rounded-md bg-sky-300 p-2 text-black font-semibold border-2 border-slate-500">
-                <option value="">Stock</option>
+                <option selected value="">Stock</option>
+                <option value="{{$countMaxStock}}" class="font-bold">TODOS</option>
                 <option value="5">5</option>
                 <option class="sm:block md:hidden" value="7">7</option>
                 <option class="hidden md:block" value="10">10</option>

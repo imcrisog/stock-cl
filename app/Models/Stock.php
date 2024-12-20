@@ -43,6 +43,7 @@ class Stock extends Model
         'V_TR',       // Matching 'V_TR' with the migration
         'V_TO',       // Matching 'V_TO' with the migration
         'TOTALES',
+        'BODEGA',
         'T',
     ];
     

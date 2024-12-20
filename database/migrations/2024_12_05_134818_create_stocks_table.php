@@ -43,6 +43,7 @@ return new class extends Migration
             $table->string('V_TR', 4)->nullable();
             $table->string('V_TO', 5)->nullable();
             $table->string('TOTALES', 10)->nullable();
+            $table->string('BODEGA', 25)->nullable();
             $table->integer('T')->nullable();
         });
     }

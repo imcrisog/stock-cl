@@ -56,6 +56,7 @@ class StockStoreFormRequest extends FormRequest
             'V_TR' => ['string'],
             'V_TO' => ['string'],
             'TOTALES' => ['string'],
+            'BODEGA' => ['string'],
             'T' => ['numeric'],
         ];
     }
