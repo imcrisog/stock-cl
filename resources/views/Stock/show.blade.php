@@ -2,6 +2,10 @@
 
 @section('content')
 
+<?php
+$pricesColumns = ['C_C_IVA', 'C_NETO', 'FLETE', 'C_P', 'P_DIST', 'MBV', 'PRECIO_LISTA', 'TOTALES'];
+?>
+
 <a href="{{route('stocks.index')}}" class="z-10 absolute top-0 left-0 p-2 rounded-md border-[1px] border-gray-600 hover:bg-gray-600 font-extrabold m-4">
     <svg  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-square-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 2h-14a3 3 0 0 0 -3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3 -3v-14a3 3 0 0 0 -3 -3zm-9.387 6.21l.094 .083l2.293 2.292l2.293 -2.292a1 1 0 0 1 1.497 1.32l-.083 .094l-2.292 2.293l2.292 2.293a1 1 0 0 1 -1.32 1.497l-.094 -.083l-2.293 -2.292l-2.293 2.292a1 1 0 0 1 -1.497 -1.32l.083 -.094l2.292 -2.293l-2.292 -2.293a1 1 0 0 1 1.32 -1.497z" /></svg>
 </a>
@@ -13,7 +17,11 @@
             @foreach($stocksColumns as $key => $value)
                 <div class="flex flex-col gap-x-2 max-w-sm">
                     <span class="font-bold">{{$value}}:</span>
-                    <span class="font-light">{{ $stock->$value }}</span>
+                    @if(in_array($value, $pricesColumns))
+                        <span class="font-light text-sm">$ {{ $stock->$value }}</span>
+                    @else
+                        <span class="font-light text-sm">{{ $stock->$value }}</span>
+                    @endif
                 </div>
                 
             @endforeach
