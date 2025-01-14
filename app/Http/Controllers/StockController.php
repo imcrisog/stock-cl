@@ -58,19 +58,28 @@ class StockController extends Controller implements HasMiddleware
     public function doSearchIndex($search)
     {
         $search = strtoupper($search);
-
-        if ($search == '') return Stock::paginate($request->perPage ?? session()->get('perPage', 5));
         $mergedResults = new Collection();
 
-        $splittedSearch = str_split($search, 2);
+        if ($search == '') return Stock::paginate($request->perPage ?? session()->get('perPage', 5));
 
-        $specificSearch = Stock::whereAny(['ANCHO', 'PERFIL', 'ARO'],'LIKE', '%'.$splittedSearch[0].'%')->get();
-        $generalSearch =  Stock::whereAny(['ANCHO', 'PERFIL', 'ARO'],'LIKE', '%'.$search.'%')->get();
-        $deepSearch = Stock::whereAny(['ANCHO', 'PERFIL', 'ARO'],'LIKE', '%'.$splittedSearch[count($splittedSearch)-1].'%')->get();
+        $splitSearch = explode(' ', $search);
 
-        $mergedResults = $generalSearch->merge($specificSearch);
-        $mergedResults->merge($deepSearch);
+        if (count($splitSearch) >= 2)
+        {
+            $doSearch = Stock::where('ANCHO', $splitSearch[0])
+                ->where('PERFIL', $splitSearch[1])
+                ->get();
+            
+            $mergedResults = $mergedResults->merge($doSearch);
+            return $mergedResults;
+        }
 
+        $doSearch = Stock::where('ANCHO', $splitSearch[0])
+            ->orWhere('PERFIL', $splitSearch[0])
+            ->orWhere('ARO', $splitSearch[0])
+            ->get();
+        
+        $mergedResults = $mergedResults->merge($doSearch);
         return $mergedResults;
     }
 
